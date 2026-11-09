@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gallery | Feel Good Spa</title>
+  <meta name="description" content="Feel Good Spa gallery." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <div class="page-watermark" aria-hidden="true"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="topbar d-none d-lg-block">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="topbar-left">
+          <a href="#"><i class="bi bi-telephone"></i> +00 000 000 0000</a>
+          <a href="#"><i class="bi bi-envelope"></i> hello@feelgoodspa.example</a>
+        </div>
+        <div class="topbar-right">
+          <span class="topbar-badge">Relax · Restore · Feel Good</span>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="brand" href="index.html" aria-label="Feel Good Spa home">
+          <span class="brand-mark"><i class="bi bi-flower1"></i></span>
+          <span class="brand-name">Feel <em>Good</em> Spa</span>
+        </a>
+        <nav class="nav-center" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="packages.html">Packages</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="booking.html" class="btn-nav-cta">Book now <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <button class="navbar-toggler" type="button" id="mobileToggle" aria-controls="mobileNav" aria-expanded="false" aria-label="Open menu">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-nav-overlay" id="mobileOverlay"></div>
+  <aside class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <div class="mobile-nav-head">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"><i class="bi bi-flower1"></i></span>
+        <span class="brand-name">Feel <em>Good</em> Spa</span>
+      </a>
+      <button class="mobile-nav-close" id="mobileClose" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="mobile-nav-body">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html">Home <i class="bi bi-arrow-right"></i></a></li>
+        <li><a class="nav-link" href="about.html">About <i class="bi bi-arrow-right"></i></a></li>
+        <li><a class="nav-link" href="services.html">Services <i class="bi bi-arrow-right"></i></a></li>
+        <li><a class="nav-link" href="packages.html">Packages <i class="bi bi-arrow-right"></i></a></li>
+        <li><a class="nav-link" href="gallery.html">Gallery <i class="bi bi-arrow-right"></i></a></li>
+        <li><a class="nav-link" href="booking.html">Booking <i class="bi bi-arrow-right"></i></a></li>
+        <li><a class="nav-link" href="contact.html">Contact <i class="bi bi-arrow-right"></i></a></li>
+      </ul>
+    </div>
+    <div class="mobile-nav-cta">
+      <a href="booking.html" class="btn-lux btn-lux-navy">Book now <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="mobile-nav-footer">
+      <p>Reach the spa</p>
+      <a href="#"><i class="bi bi-telephone"></i> +00 000 000 0000</a>
+      <a href="#"><i class="bi bi-envelope"></i> hello@feelgoodspa.example</a>
+    </div>
+  </aside>
+
+  <main id="main">
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Atmosphere</span>
+        <h1>Gallery</h1>
+        <p class="hero-sub">Interiors, treatment rooms and quiet details that shape the Feel Good Spa experience.</p>
+      </div>
+    </section>
+    <section class="section bg-cream">
+      <div class="container">
+        <div class="filter-bar reveal" role="group" aria-label="Gallery categories">
+          <button type="button" class="filter-btn active" data-gallery-filter="all">All</button>
+          <button type="button" class="filter-btn" data-gallery-filter="interiors">Spa interiors</button>
+          <button type="button" class="filter-btn" data-gallery-filter="rooms">Massage rooms</button>
+          <button type="button" class="filter-btn" data-gallery-filter="treatments">Treatments</button>
+          <button type="button" class="filter-btn" data-gallery-filter="relaxation">Relaxation</button>
+          <button type="button" class="filter-btn" data-gallery-filter="products">Products</button>
+          <button type="button" class="filter-btn" data-gallery-filter="facial">Facial</button>
+        </div>
+        <div class="gallery-grid reveal"><figure class="gallery-item" data-lightbox data-gallery-category="interiors"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=80" alt="Luxury spa interior" /><span class="gallery-icon"><i class="bi bi-zoom-in"></i></span></figure>
+<figure class="gallery-item" data-lightbox data-gallery-category="rooms"><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=80" alt="Peaceful massage room" /><span class="gallery-icon"><i class="bi bi-zoom-in"></i></span></figure>
+<figure class="gallery-item" data-lightbox data-gallery-category="treatments"><img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=900&q=80" alt="Massage treatment" /><span class="gallery-icon"><i class="bi bi-zoom-in"></i></span></figure>
+<figure class="gallery-item" data-lightbox data-gallery-category="relaxation"><img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=900&q=80" alt="Relaxation space" /><span class="gallery-icon"><i class="bi bi-zoom-in"></i></span></figure>
+<figure class="gallery-item" data-lightbox data-gallery-category="products"><img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=900&q=80" alt="Spa products" /><span class="gallery-icon"><i class="bi bi-zoom-in"></i></span></figure>
+<figure class="gallery-item" data-lightbox data-gallery-category="facial"><img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="Facial treatment" /><span class="gallery-icon"><i class="bi bi-zoom-in"></i></span></figure>
+<figure class="gallery-item" data-lightbox data-gallery-category="interiors"><img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=900&q=80" alt="Calm spa seating" /><span class="gallery-icon"><i class="bi bi-zoom-in"></i></span></figure>
+<figure class="gallery-item" data-lightbox data-gallery-category="rooms"><img src="https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?auto=format&fit=crop&w=900&q=80" alt="Massage table prepared" /><span class="gallery-icon"><i class="bi bi-zoom-in"></i></span></figure>
+<figure class="gallery-item" data-lightbox data-gallery-category="treatments"><img src="https://images.unsplash.com/photo-1515375660635-ccf4f8e7ef57?auto=format&fit=crop&w=900&q=80" alt="Body scrub care" /><span class="gallery-icon"><i class="bi bi-zoom-in"></i></span></figure>
+<figure class="gallery-item" data-lightbox data-gallery-category="relaxation"><img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=900&q=80" alt="Spa lounge" /><span class="gallery-icon"><i class="bi bi-zoom-in"></i></span></figure>
+<figure class="gallery-item" data-lightbox data-gallery-category="products"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=80" alt="Skincare products" /><span class="gallery-icon"><i class="bi bi-zoom-in"></i></span></figure>
+<figure class="gallery-item" data-lightbox data-gallery-category="facial"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=80" alt="Facial wellness" /><span class="gallery-icon"><i class="bi bi-zoom-in"></i></span></figure></div>
+      </div>
+    </section>
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+      <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+      <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous"><i class="bi bi-chevron-left"></i></button>
+      <img class="lightbox-image" src="" alt="" />
+      <button type="button" class="lightbox-nav lightbox-next" aria-label="Next"><i class="bi bi-chevron-right"></i></button>
+    </div>
+
+  </main>
+
+  <section class="cta section">
+    <div class="cta-inner reveal">
+      <span class="eyebrow light">Begin here</span>
+      <h2>Ready to <em>feel good</em> again?</h2>
+      <p>Reserve a treatment or package and give yourself permission to rest. We will take care of the details.</p>
+      <div class="cta-actions">
+        <a href="booking.html" class="btn-lux btn-lux-gold">Book an appointment</a>
+        <a href="contact.html" class="btn-lux btn-lux-ghost">Contact us</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-watermark" aria-hidden="true"></div>
+    <div class="container footer-inner">
+      <div class="footer-grid">
+        <div>
+          <a class="footer-brand" href="index.html">
+            <span class="brand-mark"><i class="bi bi-flower1"></i></span>
+            <span class="brand-name">Feel <em>Good</em> Spa</span>
+          </a>
+          <p class="footer-about">A calm spa sanctuary for massage and wellness — thoughtfully paced treatments in a peaceful, modern setting.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Explore</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="packages.html">Packages</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Visit</h4>
+          <div class="footer-contact">
+            <span><i class="bi bi-geo-alt"></i> 123 Serenity Lane, Your City</span>
+            <span><i class="bi bi-telephone"></i> +00 000 000 0000</span>
+            <span><i class="bi bi-envelope"></i> hello@feelgoodspa.example</span>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Newsletter</h4>
+          <div class="footer-newsletter">
+            <p>Spa notes and seasonal offers.</p>
+            <form class="footer-newsletter-form" id="newsletterForm" novalidate>
+              <input type="email" id="newsletterEmail" name="email" placeholder="Your email" required />
+              <button type="submit" aria-label="Subscribe"><i class="bi bi-arrow-right"></i></button>
+            </form>
+            <div id="newsletterMessage" class="form-message" role="status"></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span data-year></span> Feel Good Spa. All rights reserved.</p>
+        <ul class="footer-legal">
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="booking.html">Booking</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top"><i class="bi bi-chevron-up"></i></button>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

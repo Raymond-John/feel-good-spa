@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services | Feel Good Spa</title>
+  <meta name="description" content="Explore massage, body and facial treatments at Feel Good Spa." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <div class="page-watermark" aria-hidden="true"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="topbar d-none d-lg-block">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="topbar-left">
+          <a href="#"><i class="bi bi-telephone"></i> +00 000 000 0000</a>
+          <a href="#"><i class="bi bi-envelope"></i> hello@feelgoodspa.example</a>
+        </div>
+        <div class="topbar-right">
+          <span class="topbar-badge">Relax · Restore · Feel Good</span>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="brand" href="index.html" aria-label="Feel Good Spa home">
+          <span class="brand-mark"><i class="bi bi-flower1"></i></span>
+          <span class="brand-name">Feel <em>Good</em> Spa</span>
+        </a>
+        <nav class="nav-center" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="packages.html">Packages</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="booking.html" class="btn-nav-cta">Book now <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <button class="navbar-toggler" type="button" id="mobileToggle" aria-controls="mobileNav" aria-expanded="false" aria-label="Open menu">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-nav-overlay" id="mobileOverlay"></div>
+  <aside class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <div class="mobile-nav-head">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"><i class="bi bi-flower1"></i></span>
+        <span class="brand-name">Feel <em>Good</em> Spa</span>
+      </a>
+      <button class="mobile-nav-close" id="mobileClose" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="mobile-nav-body">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html">Home <i class="bi bi-arrow-right"></i></a></li>
+        <li><a class="nav-link" href="about.html">About <i class="bi bi-arrow-right"></i></a></li>
+        <li><a class="nav-link" href="services.html">Services <i class="bi bi-arrow-right"></i></a></li>
+        <li><a class="nav-link" href="packages.html">Packages <i class="bi bi-arrow-right"></i></a></li>
+        <li><a class="nav-link" href="gallery.html">Gallery <i class="bi bi-arrow-right"></i></a></li>
+        <li><a class="nav-link" href="booking.html">Booking <i class="bi bi-arrow-right"></i></a></li>
+        <li><a class="nav-link" href="contact.html">Contact <i class="bi bi-arrow-right"></i></a></li>
+      </ul>
+    </div>
+    <div class="mobile-nav-cta">
+      <a href="booking.html" class="btn-lux btn-lux-navy">Book now <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="mobile-nav-footer">
+      <p>Reach the spa</p>
+      <a href="#"><i class="bi bi-telephone"></i> +00 000 000 0000</a>
+      <a href="#"><i class="bi bi-envelope"></i> hello@feelgoodspa.example</a>
+    </div>
+  </aside>
+
+  <main id="main">
+
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Treatments</span>
+        <h1>Our <em>services</em></h1>
+        <p class="hero-sub">Massage, body care and facial treatments designed for calm, comfort and renewal.</p>
+      </div>
+    </section>
+    <section class="section bg-cream">
+      <div class="container">
+        <div class="filter-bar reveal" role="group" aria-label="Service categories">
+          <button type="button" class="filter-btn active" data-service-filter="all">All</button>
+          <button type="button" class="filter-btn" data-service-filter="massage">Massage</button>
+          <button type="button" class="filter-btn" data-service-filter="body">Body treatments</button>
+          <button type="button" class="filter-btn" data-service-filter="facial">Facial treatments</button>
+        </div>
+        <div class="dest-grid reveal">
+          <article class="dest-card" data-service-category="massage" style="cursor:default;">
+            <div class="dest-media"><span class="dest-continent">massage</span><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" alt="Swedish Massage" /></div>
+            <div class="dest-body">
+              <h3>Swedish Massage</h3>
+              <p style="text-transform:none;letter-spacing:0;font-size:14px;line-height:1.6;margin-bottom:8px;">Classic long strokes and gentle kneading to ease tension and encourage deep relaxation.</p>
+              <div class="svc-meta"><span><i class="bi bi-clock"></i> 60 / 90 min</span><span class="price">From $85</span></div>
+              <div class="svc-actions">
+                <a href="service-details.html?service=swedish-massage" class="btn-lux btn-lux-ghost btn-sm-lux">View details</a>
+                <a href="booking.html?service=swedish-massage" class="btn-lux btn-lux-navy btn-sm-lux">Book now</a>
+              </div>
+            </div>
+          </article>
+          <article class="dest-card" data-service-category="massage" style="cursor:default;">
+            <div class="dest-media"><span class="dest-continent">massage</span><img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80" alt="Deep Tissue Massage" /></div>
+            <div class="dest-body">
+              <h3>Deep Tissue Massage</h3>
+              <p style="text-transform:none;letter-spacing:0;font-size:14px;line-height:1.6;margin-bottom:8px;">Focused pressure that works into deeper layers of muscle to ease stubborn tightness.</p>
+              <div class="svc-meta"><span><i class="bi bi-clock"></i> 60 / 90 min</span><span class="price">From $105</span></div>
+              <div class="svc-actions">
+                <a href="service-details.html?service=deep-tissue-massage" class="btn-lux btn-lux-ghost btn-sm-lux">View details</a>
+                <a href="booking.html?service=deep-tissue-massage" class="btn-lux btn-lux-navy btn-sm-lux">Book now</a>
+              </div>
+            </div>
+          </article>
+          <article class="dest-card" data-service-category="massage" style="cursor:default;">
+            <div class="dest-media"><span class="dest-continent">massage</span><img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80" alt="Aromatherapy" /></div>
+            <div class="dest-body">
+              <h3>Aromatherapy</h3>
+              <p style="text-transform:none;letter-spacing:0;font-size:14px;line-height:1.6;margin-bottom:8px;">A soothing massage blended with carefully selected essential oils for mind and body balance.</p>
+              <div class="svc-meta"><span><i class="bi bi-clock"></i> 75 min</span><span class="price">From $95</span></div>
+              <div class="svc-actions">
+                <a href="service-details.html?service=aromatherapy" class="btn-lux btn-lux-ghost btn-sm-lux">View details</a>
+                <a href="booking.html?service=aromatherapy" class="btn-lux btn-lux-navy btn-sm-lux">Book now</a>
+              </div>
+            </div>
+          </article>
+          <article class="dest-card" data-service-category="massage" style="cursor:default;">
+            <div class="dest-media"><span class="dest-continent">massage</span><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Hot Stone Massage" /></div>
+            <div class="dest-body">
+              <h3>Hot Stone Massage</h3>
+              <p style="text-transform:none;letter-spacing:0;font-size:14px;line-height:1.6;margin-bottom:8px;">Warm smooth stones and skilled hands melt away tension for a deeply grounding session.</p>
+              <div class="svc-meta"><span><i class="bi bi-clock"></i> 90 min</span><span class="price">From $120</span></div>
+              <div class="svc-actions">
+                <a href="service-details.html?service=hot-stone-massage" class="btn-lux btn-lux-ghost btn-sm-lux">View details</a>
+                <a href="booking.html?service=hot-stone-massage" class="btn-lux btn-lux-navy btn-sm-lux">Book now</a>
+              </div>
+            </div>
+          </article>
+          <article class="dest-card" data-service-category="body" style="cursor:default;">
+            <div class="dest-media"><span class="dest-continent">body</span><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80" alt="Body Polish" /></div>
+            <div class="dest-body">
+              <h3>Body Polish</h3>
+              <p style="text-transform:none;letter-spacing:0;font-size:14px;line-height:1.6;margin-bottom:8px;">A refining polish that smooths the skin and leaves it soft, luminous and refreshed.</p>
+              <div class="svc-meta"><span><i class="bi bi-clock"></i> 45 min</span><span class="price">From $70</span></div>
+              <div class="svc-actions">
+                <a href="service-details.html?service=body-polish" class="btn-lux btn-lux-ghost btn-sm-lux">View details</a>
+                <a href="booking.html?service=body-polish" class="btn-lux btn-lux-navy btn-sm-lux">Book now</a>
+              </div>
+            </div>
+          </article>
+          <article class="dest-card" data-service-category="facial" style="cursor:default;">
+            <div class="dest-media"><span class="dest-continent">facial</span><img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="Facial Treatment" /></div>
+            <div class="dest-body">
+              <h3>Facial Treatment</h3>
+              <p style="text-transform:none;letter-spacing:0;font-size:14px;line-height:1.6;margin-bottom:8px;">A customised facial that cleanses, nourishes and restores a healthy, calm complexion.</p>
+              <div class="svc-meta"><span><i class="bi bi-clock"></i> 60 min</span><span class="price">From $90</span></div>
+              <div class="svc-actions">
+                <a href="service-details.html?service=facial-treatment" class="btn-lux btn-lux-ghost btn-sm-lux">View details</a>
+                <a href="booking.html?service=facial-treatment" class="btn-lux btn-lux-navy btn-sm-lux">Book now</a>
+              </div>
+            </div>
+          </article>
+          <article class="dest-card" data-service-category="body" style="cursor:default;">
+            <div class="dest-media"><span class="dest-continent">body</span><img src="https://images.unsplash.com/photo-1515375660635-ccf4f8e7ef57?auto=format&fit=crop&w=800&q=80" alt="Body Scrub" /></div>
+            <div class="dest-body">
+              <h3>Body Scrub</h3>
+              <p style="text-transform:none;letter-spacing:0;font-size:14px;line-height:1.6;margin-bottom:8px;">Invigorating exfoliation that awakens the senses and softens the skin from head to toe.</p>
+              <div class="svc-meta"><span><i class="bi bi-clock"></i> 50 min</span><span class="price">From $75</span></div>
+              <div class="svc-actions">
+                <a href="service-details.html?service=body-scrub" class="btn-lux btn-lux-ghost btn-sm-lux">View details</a>
+                <a href="booking.html?service=body-scrub" class="btn-lux btn-lux-navy btn-sm-lux">Book now</a>
+              </div>
+            </div>
+          </article>
+          <article class="dest-card" data-service-category="massage" style="cursor:default;">
+            <div class="dest-media"><span class="dest-continent">massage</span><img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=800&q=80" alt="Relaxation Massage" /></div>
+            <div class="dest-body">
+              <h3>Relaxation Massage</h3>
+              <p style="text-transform:none;letter-spacing:0;font-size:14px;line-height:1.6;margin-bottom:8px;">Soft, flowing techniques designed purely for calm, comfort and quiet restoration.</p>
+              <div class="svc-meta"><span><i class="bi bi-clock"></i> 60 min</span><span class="price">From $80</span></div>
+              <div class="svc-actions">
+                <a href="service-details.html?service=relaxation-massage" class="btn-lux btn-lux-ghost btn-sm-lux">View details</a>
+                <a href="booking.html?service=relaxation-massage" class="btn-lux btn-lux-navy btn-sm-lux">Book now</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="cta section">
+    <div class="cta-inner reveal">
+      <span class="eyebrow light">Begin here</span>
+      <h2>Ready to <em>feel good</em> again?</h2>
+      <p>Reserve a treatment or package and give yourself permission to rest. We will take care of the details.</p>
+      <div class="cta-actions">
+        <a href="booking.html" class="btn-lux btn-lux-gold">Book an appointment</a>
+        <a href="contact.html" class="btn-lux btn-lux-ghost">Contact us</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-watermark" aria-hidden="true"></div>
+    <div class="container footer-inner">
+      <div class="footer-grid">
+        <div>
+          <a class="footer-brand" href="index.html">
+            <span class="brand-mark"><i class="bi bi-flower1"></i></span>
+            <span class="brand-name">Feel <em>Good</em> Spa</span>
+          </a>
+          <p class="footer-about">A calm spa sanctuary for massage and wellness — thoughtfully paced treatments in a peaceful, modern setting.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Explore</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="packages.html">Packages</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Visit</h4>
+          <div class="footer-contact">
+            <span><i class="bi bi-geo-alt"></i> 123 Serenity Lane, Your City</span>
+            <span><i class="bi bi-telephone"></i> +00 000 000 0000</span>
+            <span><i class="bi bi-envelope"></i> hello@feelgoodspa.example</span>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Newsletter</h4>
+          <div class="footer-newsletter">
+            <p>Spa notes and seasonal offers.</p>
+            <form class="footer-newsletter-form" id="newsletterForm" novalidate>
+              <input type="email" id="newsletterEmail" name="email" placeholder="Your email" required />
+              <button type="submit" aria-label="Subscribe"><i class="bi bi-arrow-right"></i></button>
+            </form>
+            <div id="newsletterMessage" class="form-message" role="status"></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span data-year></span> Feel Good Spa. All rights reserved.</p>
+        <ul class="footer-legal">
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="booking.html">Booking</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top"><i class="bi bi-chevron-up"></i></button>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
