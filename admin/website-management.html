@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Website Management | Feel Good Spa Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/admin.css" />
+</head>
+<body data-page="website">
+  <div class="dash-shell">
+    <nav class="float-nav" id="floatNav" aria-label="Admin navigation"></nav>
+    <div class="admin-main">
+      <header class="admin-topbar" id="adminTopbar"></header>
+      <main class="admin-content">
+        <div class="demo-banner"><i class="bi bi-info-circle"></i> Demonstration data — stored in this browser only</div>
+        <div class="page-head">
+          <div>
+            <h1>Website management</h1>
+            <p>Edit public website copy and contact details. Changes save to localStorage only.</p>
+          </div>
+          <div id="pageActions"></div>
+        </div>
+
+        <div class="tabs-lux">
+          <button type="button" class="active" data-tab="tab-home">Homepage</button>
+          <button type="button" data-tab="tab-about">About</button>
+          <button type="button" data-tab="tab-contact">Contact</button>
+          <button type="button" data-tab="tab-seo">SEO</button>
+        </div>
+        <form id="websiteForm">
+          <div class="tab-pane active" id="tab-home">
+            <div class="panel"><div class="grid-2">
+              <div><label class="form-label">Hero heading</label><input class="form-control" name="heroHeading" /></div>
+              <div><label class="form-label">Welcome heading</label><input class="form-control" name="welcomeHeading" /></div>
+              <div class="form-field" style="grid-column:1/-1"><label class="form-label">Hero description</label><textarea class="form-control" name="heroDescription" rows="3"></textarea></div>
+              <div><label class="form-label">Hero image URL / upload</label><input class="form-control mb-2" name="heroImage" /><input type="file" id="heroImageFile" accept="image/*" class="form-control" /><div class="preview-box mt-2" id="heroPreview"></div></div>
+              <div><label class="form-label">Welcome description</label><textarea class="form-control" name="welcomeDescription" rows="5"></textarea></div>
+              <div><label class="form-label">Why Choose Us</label><textarea class="form-control" name="whyChooseUs" rows="4"></textarea></div>
+              <div><label class="form-label">Promotional heading</label><input class="form-control" name="promoHeading" /></div>
+              <div><label class="form-label">Promotional description</label><textarea class="form-control" name="promoDescription" rows="3"></textarea></div>
+              <div><label class="form-label">CTA heading</label><input class="form-control" name="ctaHeading" /></div>
+              <div><label class="form-label">CTA description</label><textarea class="form-control" name="ctaDescription" rows="3"></textarea></div>
+              <div style="grid-column:1/-1"><label class="form-label">Featured service IDs (comma-separated)</label><input class="form-control" name="featuredServices" /></div>
+            </div></div>
+          </div>
+          <div class="tab-pane" id="tab-about">
+            <div class="panel"><div class="grid-2">
+              <div style="grid-column:1/-1"><label class="form-label">Introduction</label><textarea class="form-control" name="introduction" rows="3"></textarea></div>
+              <div style="grid-column:1/-1"><label class="form-label">Our story</label><textarea class="form-control" name="story" rows="3"></textarea></div>
+              <div><label class="form-label">Mission</label><textarea class="form-control" name="mission" rows="3"></textarea></div>
+              <div><label class="form-label">Vision</label><textarea class="form-control" name="vision" rows="3"></textarea></div>
+              <div style="grid-column:1/-1"><label class="form-label">Values</label><textarea class="form-control" name="values" rows="2"></textarea></div>
+              <div><label class="form-label">About image URL</label><input class="form-control" name="aboutImage" /><div class="preview-box mt-2" id="aboutPreview"></div></div>
+            </div></div>
+          </div>
+          <div class="tab-pane" id="tab-contact">
+            <div class="panel"><div class="grid-2">
+              <div><label class="form-label">Business name</label><input class="form-control" name="businessName" /></div>
+              <div><label class="form-label">Phone</label><input class="form-control" name="phone" /></div>
+              <div><label class="form-label">Email</label><input class="form-control" name="email" /></div>
+              <div><label class="form-label">WhatsApp</label><input class="form-control" name="whatsapp" /></div>
+              <div style="grid-column:1/-1"><label class="form-label">Address</label><input class="form-control" name="address" /></div>
+              <div style="grid-column:1/-1"><label class="form-label">Opening hours</label><input class="form-control" name="hours" /></div>
+              <div style="grid-column:1/-1"><label class="form-label">Google Maps URL</label><input class="form-control" name="mapsUrl" /></div>
+              <div><label class="form-label">Instagram</label><input class="form-control" name="instagram" /></div>
+              <div><label class="form-label">Facebook</label><input class="form-control" name="facebook" /></div>
+              <div><label class="form-label">TikTok</label><input class="form-control" name="tiktok" /></div>
+            </div></div>
+          </div>
+          <div class="tab-pane" id="tab-seo">
+            <div class="panel"><div class="grid-2">
+              <div style="grid-column:1/-1"><label class="form-label">Page title</label><input class="form-control" name="seoTitle" /></div>
+              <div style="grid-column:1/-1"><label class="form-label">Meta description</label><textarea class="form-control" name="seoDescription" rows="3"></textarea></div>
+              <div style="grid-column:1/-1"><label class="form-label">Keywords</label><input class="form-control" name="keywords" /></div>
+              <div><label class="form-label">Social sharing image URL</label><input class="form-control" name="socialImage" /></div>
+              <div><label class="form-label">Favicon URL</label><input class="form-control" name="favicon" /></div>
+            </div></div>
+          </div>
+          <button class="btn-admin" type="submit">Save website content</button>
+        </form>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/admin.js"></script>
+
+  <script src="assets/js/pages.js"></script>
+</body>
+</html>
