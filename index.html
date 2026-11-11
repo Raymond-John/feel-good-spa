@@ -11,9 +11,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
   <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body class="page-home">
   <div class="page-watermark" aria-hidden="true"></div>
   <a href="#main" class="skip-link">Skip to content</a>
 
@@ -89,30 +90,71 @@
 
   <main id="main">
 
-    <section class="hero">
-      <div class="hero-content">
-        <span class="eyebrow">Feel Good Spa · Wellness sanctuary</span>
-        <h1>Relax. Restore.<br /><em>Feel Good.</em></h1>
-        <p class="hero-sub">A quiet spa for massage and wellness — thoughtfully designed treatments in a peaceful, modern setting.</p>
-        <div class="hero-actions">
-          <a href="booking.html" class="btn-lux btn-lux-navy">Book an appointment <i class="bi bi-arrow-right arrow"></i></a>
-          <a href="services.html" class="btn-lux btn-lux-ghost">Explore treatments</a>
+    <section class="hero hero-cinematic" aria-roledescription="carousel" aria-label="Feel Good Spa welcome">
+      <div class="hero-stage">
+        <div class="hero-slides">
+          <div class="hero-slide is-active">
+            <div class="hero-slide-media">
+              <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=85" alt="Luxury spa treatment room with warm lighting" width="1920" height="1080" loading="eager" fetchpriority="high" />
+            </div>
+          </div>
+          <div class="hero-slide">
+            <div class="hero-slide-media">
+              <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1920&q=80" alt="Calm massage treatment atmosphere" width="1920" height="1080" loading="lazy" />
+            </div>
+          </div>
+          <div class="hero-slide">
+            <div class="hero-slide-media">
+              <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=1920&q=80" alt="Peaceful spa interior details" width="1920" height="1080" loading="lazy" />
+            </div>
+          </div>
+          <div class="hero-slide">
+            <div class="hero-slide-media">
+              <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1920&q=80" alt="Relaxation spa setting with soft towels" width="1920" height="1080" loading="lazy" />
+            </div>
+          </div>
+        </div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-vignette" aria-hidden="true"></div>
+        <div class="hero-grain" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero-content-wrap">
+        <div class="container">
+          <div class="hero-content">
+            <span class="eyebrow light hero-eyebrow">Feel Good Spa · Wellness sanctuary</span>
+            <h1>Relax. Restore.<br /><em>Feel Good.</em></h1>
+            <p class="hero-sub">A quiet spa for massage and wellness — thoughtfully designed treatments in a peaceful, modern setting.</p>
+            <div class="hero-actions">
+              <a href="booking.html" class="btn-lux btn-lux-navy">Book an appointment <i class="bi bi-arrow-right arrow"></i></a>
+              <a href="services.html" class="btn-lux btn-lux-ghost">Explore treatments</a>
+            </div>
+            <div class="hero-meta">
+              <i class="bi bi-flower1" aria-hidden="true"></i>
+              <span>Designed for <em>calm</em>, not hurry</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="hero-image-wrap">
-        <div class="hero-image-card">
-          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=85" alt="Luxury spa treatment room" loading="eager" />
-          <span class="hero-image-badge">
-            <i class="bi bi-flower1"></i>
-            <span>Designed for <em>calm</em>, not hurry</span>
-          </span>
+
+      <div class="hero-controls" role="group" aria-label="Hero slideshow controls">
+        <button type="button" class="hero-ctrl" data-hero-prev aria-label="Previous image"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
+        <button type="button" class="hero-ctrl" data-hero-pause aria-pressed="false" aria-label="Pause slideshow"><i class="bi bi-pause-fill" aria-hidden="true"></i></button>
+        <button type="button" class="hero-ctrl" data-hero-next aria-label="Next image"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+        <div class="hero-progress" aria-hidden="true">
+          <button type="button" class="hero-dot is-active" aria-label="Show image 1"><span></span></button>
+          <button type="button" class="hero-dot" aria-label="Show image 2"><span></span></button>
+          <button type="button" class="hero-dot" aria-label="Show image 3"><span></span></button>
+          <button type="button" class="hero-dot" aria-label="Show image 4"><span></span></button>
         </div>
       </div>
+
+      <a href="#welcome" class="hero-scroll">Scroll <i class="bi bi-chevron-down" aria-hidden="true"></i></a>
     </section>
 
     <section class="stats-strip bg-cream-soft">
       <div class="container">
-        <div class="stats-grid">
+        <div class="stats-grid reveal">
           <div class="stat"><span class="stat-num" data-count="8" data-suffix="+">0</span><span class="stat-label">Signature treatments</span></div>
           <div class="stat"><span class="stat-num" data-count="3" data-suffix="">0</span><span class="stat-label">Spa packages</span></div>
           <div class="stat"><span class="stat-num" data-count="60" data-suffix="m">0</span><span class="stat-label">Typical session</span></div>
@@ -121,11 +163,11 @@
       </div>
     </section>
 
-    <section class="section bg-cream">
+    <section class="section bg-cream" id="welcome">
       <div class="container">
         <div class="split reveal">
           <div class="split-media">
-            <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=1000&q=80" alt="Peaceful spa interior" />
+            <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=1000&q=80" alt="Peaceful spa interior" loading="lazy" />
           </div>
           <div class="split-content">
             <span class="eyebrow no-after">Welcome</span>
@@ -151,15 +193,15 @@
         </div>
         <div class="dest-grid reveal">
           <a href="service-details.html?service=swedish-massage" class="dest-card">
-            <div class="dest-media"><span class="dest-continent">Massage</span><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" alt="Swedish massage" /></div>
+            <div class="dest-media"><span class="dest-continent">Massage</span><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" alt="Swedish massage" loading="lazy" /></div>
             <div class="dest-body"><h3>Swedish Massage</h3><p>From $85 · 60–90 min</p><span class="dest-link">View details <i class="bi bi-arrow-right"></i></span></div>
           </a>
           <a href="service-details.html?service=aromatherapy" class="dest-card">
-            <div class="dest-media"><span class="dest-continent">Massage</span><img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80" alt="Aromatherapy" /></div>
+            <div class="dest-media"><span class="dest-continent">Massage</span><img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80" alt="Aromatherapy" loading="lazy" /></div>
             <div class="dest-body"><h3>Aromatherapy</h3><p>From $95 · 75 min</p><span class="dest-link">View details <i class="bi bi-arrow-right"></i></span></div>
           </a>
           <a href="service-details.html?service=hot-stone-massage" class="dest-card">
-            <div class="dest-media"><span class="dest-continent">Massage</span><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Hot stone massage" /></div>
+            <div class="dest-media"><span class="dest-continent">Massage</span><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Hot stone massage" loading="lazy" /></div>
             <div class="dest-body"><h3>Hot Stone Massage</h3><p>From $120 · 90 min</p><span class="dest-link">View details <i class="bi bi-arrow-right"></i></span></div>
           </a>
         </div>
@@ -235,10 +277,10 @@
           <p>A glimpse into our treatment rooms, lounge spaces and calm interiors.</p>
         </div>
         <div class="gallery-preview reveal">
-          <a href="gallery.html"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80" alt="Spa room" /></a>
-          <a href="gallery.html"><img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=600&q=80" alt="Towels and candles" /></a>
-          <a href="gallery.html"><img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Facial setup" /></a>
-          <a href="gallery.html"><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&q=80" alt="Massage" /></a>
+          <a href="gallery.html"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80" alt="Spa room" loading="lazy" /></a>
+          <a href="gallery.html"><img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=600&q=80" alt="Towels and candles" loading="lazy" /></a>
+          <a href="gallery.html"><img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Facial setup" loading="lazy" /></a>
+          <a href="gallery.html"><img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&q=80" alt="Massage" loading="lazy" /></a>
         </div>
         <div class="text-center mt-5 reveal"><a href="gallery.html" class="btn-lux btn-lux-ghost">View full gallery</a></div>
       </div>
@@ -330,6 +372,9 @@
 
   <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top"><i class="bi bi-chevron-up"></i></button>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="assets/js/script.js"></script>
+  <script src="assets/js/animations.js"></script>
 </body>
 </html>

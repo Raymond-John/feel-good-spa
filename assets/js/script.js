@@ -119,13 +119,13 @@ const SERVICES = {
   const path = window.location.pathname.split("/").pop() || "index.html";
 
   const floatLinks = [
-    { href: "index.html", label: "Home", icon: "bi-house" },
-    { href: "about.html", label: "About", icon: "bi-info-circle" },
-    { href: "services.html", label: "Services", icon: "bi-flower1" },
-    { href: "packages.html", label: "Packages", icon: "bi-gift" },
-    { href: "gallery.html", label: "Gallery", icon: "bi-images" },
-    { href: "booking.html", label: "Booking", icon: "bi-calendar-check" },
-    { href: "contact.html", label: "Contact", icon: "bi-envelope" },
+    { href: "index.html", label: "Home" },
+    { href: "about.html", label: "About" },
+    { href: "services.html", label: "Services" },
+    { href: "packages.html", label: "Packages" },
+    { href: "gallery.html", label: "Gallery" },
+    { href: "booking.html", label: "Booking" },
+    { href: "contact.html", label: "Contact" },
   ];
 
   const floatNav = document.createElement("nav");
@@ -141,13 +141,8 @@ const SERVICES = {
         item.href +
         '"' +
         (isActive ? ' class="active"' : "") +
-        ' data-tip="' +
-        item.label +
-        '" aria-label="' +
-        item.label +
-        '"><i class="bi ' +
-        item.icon +
-        '" aria-hidden="true"></i><span>' +
+        ">" +
+        "<span>" +
         item.label +
         "</span></a>"
       );
@@ -155,51 +150,11 @@ const SERVICES = {
     .join("");
   document.body.appendChild(floatNav);
 
-  function isTouchNav() {
-    return (
-      window.matchMedia("(hover: none)").matches ||
-      window.matchMedia("(pointer: coarse)").matches ||
-      window.matchMedia("(max-width: 991.98px)").matches
-    );
+  function centerActiveFloatLink() {
+    const active = floatNav.querySelector("a.active");
+    if (!active || typeof active.scrollIntoView !== "function") return;
+    active.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
   }
-
-  function clearFloatOpen(except) {
-    floatNav.querySelectorAll("a").forEach(function (el) {
-      if (el !== except) el.classList.remove("is-open");
-    });
-  }
-
-  floatNav.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("mouseenter", function () {
-      if (isTouchNav()) return;
-      clearFloatOpen(link);
-      link.classList.add("is-open");
-    });
-    link.addEventListener("mouseleave", function () {
-      if (isTouchNav()) return;
-      link.classList.remove("is-open");
-    });
-    link.addEventListener("focus", function () {
-      clearFloatOpen(link);
-      link.classList.add("is-open");
-    });
-    link.addEventListener("blur", function () {
-      link.classList.remove("is-open");
-    });
-    link.addEventListener("click", function (e) {
-      if (!isTouchNav()) return;
-      if (!link.classList.contains("is-open")) {
-        e.preventDefault();
-        clearFloatOpen(link);
-        link.classList.add("is-open");
-      }
-    });
-  });
-
-  document.addEventListener("click", function (e) {
-    if (!isTouchNav()) return;
-    if (!floatNav.contains(e.target)) clearFloatOpen();
-  });
 
   function getHeroBottom() {
     const hero = document.querySelector(".hero, .page-hero");
@@ -212,8 +167,12 @@ const SERVICES = {
     const drawerOpen = drawer && drawer.classList.contains("open");
     const pastHero = window.scrollY > getHeroBottom() - 64;
     const showFloat = pastHero && !drawerOpen;
+    const wasVisible = floatNav.classList.contains("is-visible");
     floatNav.classList.toggle("is-visible", showFloat);
     document.body.classList.toggle("has-float-nav", showFloat);
+    if (showFloat && !wasVisible) {
+      window.requestAnimationFrame(centerActiveFloatLink);
+    }
   }
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
@@ -260,26 +219,33 @@ const SERVICES = {
     el.textContent = new Date().getFullYear();
   });
 
+  // GSAP + ScrollTrigger (animations.js) owns reveals/counters when available
+  const useGsapMotion =
+    typeof window.gsap !== "undefined" &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   const revealEls = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window && revealEls.length) {
-    const observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -60px 0px" }
-    );
-    revealEls.forEach(function (el) {
-      observer.observe(el);
-    });
-  } else {
-    revealEls.forEach(function (el) {
-      el.classList.add("is-visible");
-    });
+  if (!useGsapMotion) {
+    if ("IntersectionObserver" in window && revealEls.length) {
+      const observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -60px 0px" }
+      );
+      revealEls.forEach(function (el) {
+        observer.observe(el);
+      });
+    } else {
+      revealEls.forEach(function (el) {
+        el.classList.add("is-visible");
+      });
+    }
   }
 
   const counters = document.querySelectorAll(".stat-num[data-count]");
@@ -302,22 +268,24 @@ const SERVICES = {
       requestAnimationFrame(tick);
     });
   }
-  if ("IntersectionObserver" in window && counters.length) {
-    const statsSection = document.querySelector(".stats-strip");
-    const counterObs = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            animateCounters();
-            counterObs.disconnect();
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    if (statsSection) counterObs.observe(statsSection);
-  } else if (counters.length) {
-    animateCounters();
+  if (!useGsapMotion) {
+    if ("IntersectionObserver" in window && counters.length) {
+      const statsSection = document.querySelector(".stats-strip");
+      const counterObs = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              animateCounters();
+              counterObs.disconnect();
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      if (statsSection) counterObs.observe(statsSection);
+    } else if (counters.length) {
+      animateCounters();
+    }
   }
 
   const backBtn = document.getElementById("backToTop");
