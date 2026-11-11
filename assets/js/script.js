@@ -153,7 +153,7 @@ const SERVICES = {
   function centerActiveFloatLink() {
     const active = floatNav.querySelector("a.active");
     if (!active || typeof active.scrollIntoView !== "function") return;
-    active.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+    active.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
   }
 
   function getHeroBottom() {

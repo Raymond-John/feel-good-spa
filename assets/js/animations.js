@@ -1,8 +1,9 @@
-/* Feel Good Spa — GSAP cinematic motion system */
+/* Feel Good Spa — advanced cinematic GSAP motion */
 (function () {
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var hasGsap = typeof window.gsap !== "undefined";
 
   window.FGSMotion = {
@@ -14,7 +15,14 @@
     return Array.prototype.slice.call((root || document).querySelectorAll(sel));
   }
 
-  function initHeroSlideshow(forcePause) {
+  function syncHeroHeader() {
+    if (!document.body.classList.contains("page-home")) return;
+    document.body.classList.toggle("is-hero-scrolled", window.scrollY > 48);
+  }
+
+  /* ---------- Slideshow (CSS fallback + GSAP path) ---------- */
+  function initHeroSlideshow(options) {
+    options = options || {};
     var hero = document.querySelector(".hero.hero-cinematic");
     if (!hero) return;
 
@@ -23,6 +31,7 @@
     var prev = hero.querySelector("[data-hero-prev]");
     var next = hero.querySelector("[data-hero-next]");
     var pauseBtn = hero.querySelector("[data-hero-pause]");
+    var caption = hero.querySelector("[data-hero-caption]");
     if (slides.length < 2) return;
 
     var index = Math.max(
@@ -32,8 +41,28 @@
       })
     );
     var timer = null;
-    var paused = !!forcePause || reduceMotion;
-    var DURATION = 7000;
+    var paused = !!options.forcePause || reduceMotion;
+    var busy = false;
+    var DURATION = 8000;
+    var useGsap = !!options.useGsap && typeof window.gsap !== "undefined";
+
+    function setCaption(i) {
+      if (!caption) return;
+      var text = slides[i].getAttribute("data-caption") || "";
+      if (useGsap) {
+        gsap.to(caption, {
+          autoAlpha: 0,
+          y: 6,
+          duration: 0.25,
+          onComplete: function () {
+            caption.textContent = text;
+            gsap.to(caption, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" });
+          },
+        });
+      } else {
+        caption.textContent = text;
+      }
+    }
 
     function setDots(i) {
       dots.forEach(function (dot, di) {
@@ -41,24 +70,56 @@
         dot.setAttribute("aria-current", di === i ? "true" : "false");
         var fill = dot.querySelector("span");
         if (!fill) return;
-        fill.style.animation = "none";
+        fill.classList.remove("is-running");
         void fill.offsetWidth;
-        if (di === i && !paused) fill.style.removeProperty("animation");
+        if (di === i && !paused) fill.classList.add("is-running");
       });
     }
 
     function goTo(nextIndex) {
-      if (nextIndex === index) return;
+      if (nextIndex === index || busy) return;
       var current = slides[index];
       var upcoming = slides[nextIndex];
-      current.classList.remove("is-active");
-      current.classList.add("is-leaving");
-      upcoming.classList.add("is-active");
-      window.setTimeout(function () {
-        current.classList.remove("is-leaving");
-      }, 1400);
+      busy = true;
+
+      if (useGsap) {
+        var img = upcoming.querySelector("img");
+        gsap.set(upcoming, {
+          autoAlpha: 1,
+          visibility: "visible",
+          zIndex: 3,
+          clipPath: "inset(0% 0% 0% 100%)",
+        });
+        if (img) gsap.set(img, { scale: 1.18 });
+
+        var tl = gsap.timeline({
+          defaults: { ease: "power3.inOut" },
+          onComplete: function () {
+            current.classList.remove("is-active", "is-leaving");
+            gsap.set(current, { autoAlpha: 0, visibility: "hidden", zIndex: 0, clipPath: "inset(0 0 0 0)" });
+            upcoming.classList.add("is-active");
+            gsap.set(upcoming, { zIndex: 1, clearProps: "clipPath" });
+            busy = false;
+          },
+        });
+
+        current.classList.add("is-leaving");
+        tl.to(upcoming, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.35 }, 0);
+        if (img) tl.to(img, { scale: 1.05, duration: 1.6, ease: "power2.out" }, 0);
+        tl.to(current, { autoAlpha: 0.35, duration: 1.1 }, 0.15);
+      } else {
+        current.classList.remove("is-active");
+        current.classList.add("is-leaving");
+        upcoming.classList.add("is-active");
+        window.setTimeout(function () {
+          current.classList.remove("is-leaving");
+          busy = false;
+        }, 1400);
+      }
+
       index = nextIndex;
       setDots(index);
+      setCaption(index);
       restart();
     }
 
@@ -116,6 +177,7 @@
       else if (!paused) restart();
     });
 
+    setCaption(index);
     setDots(index);
     if (!paused) restart();
   }
@@ -124,16 +186,24 @@
     qsa(".reveal").forEach(function (el) {
       el.classList.add("is-visible");
     });
+    qsa(".hero-overlay, .hero-vignette, .hero-grain, .hero-frame, .hero-float, .hero-ornament").forEach(
+      function (el) {
+        el.style.opacity = "1";
+      }
+    );
   }
+
+  syncHeroHeader();
+  window.addEventListener("scroll", syncHeroHeader, { passive: true });
 
   if (!hasGsap || reduceMotion) {
     revealAllFallback();
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", function () {
-        initHeroSlideshow(true);
+        initHeroSlideshow({ forcePause: true, useGsap: false });
       });
     } else {
-      initHeroSlideshow(true);
+      initHeroSlideshow({ forcePause: true, useGsap: false });
     }
     return;
   }
@@ -162,13 +232,7 @@
           } else if (node.nodeType === 1) {
             var tag = node.tagName.toLowerCase();
             words.push(
-              '<span class="word"><' +
-                tag +
-                ">" +
-                node.textContent +
-                "</" +
-                tag +
-                "></span>"
+              '<span class="word"><' + tag + ">" + node.textContent + "</" + tag + "></span>"
             );
           }
         });
@@ -182,46 +246,79 @@
     var hero = document.querySelector(".hero.hero-cinematic");
     if (!hero) return;
 
+    var stage = hero.querySelector(".hero-stage");
+    var overlay = hero.querySelector(".hero-overlay");
+    var vignette = hero.querySelector(".hero-vignette");
+    var grain = hero.querySelector(".hero-grain");
+    var frame = hero.querySelector(".hero-frame");
+    var floatCard = hero.querySelector(".hero-float");
+    var floatImg = hero.querySelector(".hero-float-media img");
+    var ornament = hero.querySelector(".hero-ornament");
     var eyebrow = hero.querySelector(".hero-eyebrow, .eyebrow");
     var title = hero.querySelector("h1");
     var sub = hero.querySelector(".hero-sub");
     var actions = hero.querySelector(".hero-actions");
+    var actionBtns = actions ? qsa(".btn-lux", actions) : [];
     var meta = hero.querySelector(".hero-meta");
     var controls = hero.querySelector(".hero-controls");
     var scrollCue = hero.querySelector(".hero-scroll");
-    var stage = hero.querySelector(".hero-stage");
+    var activeImg = hero.querySelector(".hero-slide.is-active img");
 
     if (title) splitHeadline(title);
     var words = title ? qsa(".word", title) : [];
 
-    gsap.set([eyebrow, sub, actions, meta, controls, scrollCue].filter(Boolean), {
-      autoAlpha: 0,
-      y: 28,
-    });
-    gsap.set(words, { yPercent: 110, autoAlpha: 0 });
-    if (stage) gsap.set(stage, { clipPath: "inset(10% 6% 10% 6%)", scale: 1.05 });
+    gsap.set(
+      [eyebrow, sub, meta, controls, scrollCue, frame, floatCard, ornament].filter(Boolean),
+      { autoAlpha: 0, y: 28 }
+    );
+    gsap.set(actionBtns, { autoAlpha: 0, y: 24 });
+    gsap.set(words, { yPercent: 120, autoAlpha: 0 });
+    gsap.set([overlay, vignette, grain].filter(Boolean), { autoAlpha: 0 });
+    if (stage) gsap.set(stage, { clipPath: "inset(14% 10% 14% 10%)", scale: 1.08 });
+    if (activeImg) gsap.set(activeImg, { scale: 1.18 });
+    if (floatImg) gsap.set(floatImg, { scale: 1.12 });
 
     var tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
     if (stage) {
       tl.to(
         stage,
-        { clipPath: "inset(0% 0% 0% 0%)", scale: 1, duration: 1.55, ease: "power2.inOut" },
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          scale: 1,
+          duration: 1.85,
+          ease: "power2.inOut",
+        },
         0
       );
     }
-    if (eyebrow) tl.to(eyebrow, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.35);
-    if (words.length) {
-      tl.to(words, { yPercent: 0, autoAlpha: 1, duration: 1, stagger: 0.08 }, 0.55);
+    if (activeImg) {
+      tl.to(activeImg, { scale: 1.05, duration: 2.2, ease: "power2.out" }, 0.05);
     }
-    if (sub) tl.to(sub, { autoAlpha: 1, y: 0, duration: 0.85 }, 1.05);
-    if (actions) tl.to(actions, { autoAlpha: 1, y: 0, duration: 0.8 }, 1.25);
-    if (meta) tl.to(meta, { autoAlpha: 1, y: 0, duration: 0.75 }, 1.45);
-    if (controls) tl.to(controls, { autoAlpha: 1, y: 0, duration: 0.7 }, 1.55);
-    if (scrollCue) tl.to(scrollCue, { autoAlpha: 1, y: 0, duration: 0.7 }, 1.65);
+    if (overlay) tl.to(overlay, { autoAlpha: 1, duration: 1.1 }, 0.25);
+    if (vignette) tl.to(vignette, { autoAlpha: 1, duration: 1.1 }, 0.35);
+    if (grain) tl.to(grain, { autoAlpha: 0.045, duration: 1 }, 0.45);
+    if (eyebrow) tl.to(eyebrow, { autoAlpha: 1, y: 0, duration: 0.85 }, 0.55);
+    if (words.length) {
+      tl.to(words, { yPercent: 0, autoAlpha: 1, duration: 1.05, stagger: 0.09, ease: "power3.out" }, 0.75);
+    }
+    if (sub) tl.to(sub, { autoAlpha: 1, y: 0, duration: 0.9 }, 1.25);
+    if (actionBtns.length) {
+      tl.to(actionBtns, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.12 }, 1.45);
+    }
+    if (meta) tl.to(meta, { autoAlpha: 1, y: 0, duration: 0.75 }, 1.7);
+    if (frame) tl.to(frame, { autoAlpha: 1, y: 0, duration: 1, ease: "power2.out" }, 1.55);
+    if (floatCard) {
+      tl.to(floatCard, { autoAlpha: 1, y: 0, duration: 1.05, ease: "power2.out" }, 1.75);
+      if (floatImg) tl.to(floatImg, { scale: 1, duration: 1.4, ease: "power2.out" }, 1.75);
+    }
+    if (ornament) tl.to(ornament, { autoAlpha: 1, y: 0, duration: 0.9 }, 1.95);
+    if (controls) tl.to(controls, { autoAlpha: 1, y: 0, duration: 0.75 }, 1.9);
+    if (scrollCue) tl.to(scrollCue, { autoAlpha: 1, y: 0, duration: 0.7 }, 2.05);
 
     if (stage && ScrollTrigger) {
       gsap.to(stage, {
-        yPercent: 10,
+        yPercent: 14,
         ease: "none",
         scrollTrigger: {
           trigger: hero,
@@ -231,6 +328,68 @@
         },
       });
     }
+  }
+
+  function initMouseParallax() {
+    if (!canHover || reduceMotion) return;
+    var hero = document.querySelector(".hero.hero-immersive");
+    if (!hero) return;
+
+    var layers = [
+      { el: hero.querySelector('[data-parallax="bg"]'), x: 18, y: 12 },
+      { el: hero.querySelector('[data-parallax="mid"]'), x: -12, y: -8 },
+      { el: hero.querySelector('[data-parallax="fg"]'), x: -22, y: 16 },
+      { el: hero.querySelector(".hero-ornament"), x: 14, y: -18 },
+      { el: hero.querySelector('[data-parallax="content"]'), x: -8, y: 6 },
+    ].filter(function (item) {
+      return item.el;
+    });
+
+    if (!layers.length) return;
+
+    var dest = { x: 0, y: 0 };
+    var curr = { x: 0, y: 0 };
+    var ticking = false;
+
+    function render() {
+      curr.x += (dest.x - curr.x) * 0.06;
+      curr.y += (dest.y - curr.y) * 0.06;
+      layers.forEach(function (layer) {
+        gsap.set(layer.el, {
+          x: curr.x * layer.x,
+          y: curr.y * layer.y,
+          force3D: true,
+        });
+      });
+      if (Math.abs(dest.x - curr.x) > 0.001 || Math.abs(dest.y - curr.y) > 0.001) {
+        requestAnimationFrame(render);
+      } else {
+        ticking = false;
+      }
+    }
+
+    hero.addEventListener(
+      "pointermove",
+      function (e) {
+        var rect = hero.getBoundingClientRect();
+        dest.x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+        dest.y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(render);
+        }
+      },
+      { passive: true }
+    );
+
+    hero.addEventListener("pointerleave", function () {
+      dest.x = 0;
+      dest.y = 0;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(render);
+      }
+    });
   }
 
   function initScrollReveals() {
@@ -246,11 +405,11 @@
       );
       var targets = kids.length ? kids : [section];
 
-      gsap.set(targets, { autoAlpha: 0, y: 36 });
+      gsap.set(targets, { autoAlpha: 0, y: 40 });
       gsap.to(targets, {
         autoAlpha: 1,
         y: 0,
-        duration: 0.95,
+        duration: 1,
         stagger: 0.1,
         ease: "power3.out",
         scrollTrigger: {
@@ -268,10 +427,11 @@
       function (img) {
         gsap.fromTo(
           img,
-          { scale: 1.12 },
+          { scale: 1.14, y: 16 },
           {
             scale: 1,
-            duration: 1.3,
+            y: 0,
+            duration: 1.4,
             ease: "power2.out",
             scrollTrigger: {
               trigger: img.parentElement || img,
@@ -282,6 +442,20 @@
         );
       }
     );
+
+    qsa(".section-head h2, .split-content h2").forEach(function (heading) {
+      gsap.fromTo(
+        heading,
+        { autoAlpha: 0, y: 28 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: { trigger: heading, start: "top 88%", once: true },
+        }
+      );
+    });
   }
 
   function initPageHero() {
@@ -316,7 +490,7 @@
           var obj = { val: 0 };
           gsap.to(obj, {
             val: target,
-            duration: 1.6,
+            duration: 1.7,
             ease: "power2.out",
             onUpdate: function () {
               el.innerHTML =
@@ -333,7 +507,8 @@
 
   function boot() {
     initCinematicHero();
-    initHeroSlideshow(false);
+    initHeroSlideshow({ forcePause: false, useGsap: true });
+    initMouseParallax();
     initPageHero();
     initScrollReveals();
     initCounters();
